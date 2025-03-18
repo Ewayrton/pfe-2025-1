@@ -1,103 +1,137 @@
-import Image from "next/image";
+import React, { useState } from "react";
+import DadoVisual from "./components/JogoDados";
 
-export default function Home() {
+const CompeticaoDados = () => {
+  const [turno, setTurno] = useState(1);
+  const [pontuacaoA, setPontuacaoA] = useState(0);
+  const [pontuacaoB, setPontuacaoB] = useState(0);
+  const [resultadoA, setResultadoA] = useState(1);
+  const [resultadoB, setResultadoB] = useState(1);
+  const [statusFinal, setStatusFinal] = useState("");
+
+  const proximoTurno = () => {
+    if (turno <= 5) {
+      const novoValorA = Math.floor(Math.random() * 6) + 1;
+      const novoValorB = Math.floor(Math.random() * 6) + 1;
+
+      setResultadoA(novoValorA);
+      setResultadoB(novoValorB);
+
+      if (novoValorA > novoValorB) {
+        setPontuacaoA(pontuacaoA + 1);
+      } else if (novoValorB > novoValorA) {
+        setPontuacaoB(pontuacaoB + 1);
+      }
+
+      setTurno(turno + 1);
+    }
+
+    if (turno === 5) {
+      if (pontuacaoA > pontuacaoB) {
+        setStatusFinal("Competidor A é o campeão!");
+      } else if (pontuacaoB > pontuacaoA) {
+        setStatusFinal("Competidor B é o campeão!");
+      } else {
+        setStatusFinal("Houve um empate técnico!");
+      }
+    }
+  };
+
+  const reiniciarCompeticao = () => {
+    setTurno(1);
+    setPontuacaoA(0);
+    setPontuacaoB(0);
+    setResultadoA(1);
+    setResultadoB(1);
+    setStatusFinal("");
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div
+      style={{
+        textAlign: "center",
+        fontFamily: "'Roboto', sans-serif",
+        backgroundColor: "#e0f7fa",
+        minHeight: "100vh",
+        padding: "20px",
+      }}
+    >
+      <h1 style={{ color: "#00796b", fontSize: "2.2rem", marginBottom: "20px" }}>Competição de Dados 🎲</h1>
+      <h2 style={{ color: "#004d40", fontSize: "1.6rem", marginBottom: "20px" }}>Turno Atual: {turno <= 5 ? turno : "Fim da competição"}</h2>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <div style={{ display: "flex", justifyContent: "center", gap: "50px", marginBottom: "30px" }}>
+        <div
+          style={{
+            textAlign: "center",
+            padding: "15px",
+            backgroundColor: "#ffffff",
+            borderRadius: "15px",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            width: "200px",
+          }}
+        >
+          <h3 style={{ color: "#00796b", fontWeight: "bold" }}>Competidor A</h3>
+          <DadoVisual valor={resultadoA} />
+          <p style={{ color: "#004d40", fontSize: "1.2rem", fontWeight: "bold" }}>Pontuação: {pontuacaoA}</p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        <div
+          style={{
+            textAlign: "center",
+            padding: "15px",
+            backgroundColor: "#ffffff",
+            borderRadius: "15px",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            width: "200px",
+          }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <h3 style={{ color: "#d32f2f", fontWeight: "bold" }}>Competidor B</h3>
+          <DadoVisual valor={resultadoB} />
+          <p style={{ color: "#b71c1c", fontSize: "1.2rem", fontWeight: "bold" }}>Pontuação: {pontuacaoB}</p>
+        </div>
+      </div>
+
+      {turno <= 5 ? (
+        <button
+          onClick={proximoTurno}
+          style={{
+            padding: "12px 24px",
+            fontSize: "1rem",
+            backgroundColor: "#00796b",
+            color: "#ffffff",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            transition: "background-color 0.3s",
+          }}
+          onMouseOver={(e) => (e.target.style.backgroundColor = "#004d40")}
+          onMouseOut={(e) => (e.target.style.backgroundColor = "#00796b")}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          Próximo Turno 🎲
+        </button>
+      ) : (
+        <>
+          <h2 style={{ color: "#004d40", fontSize: "1.8rem", marginTop: "20px" }}>{statusFinal}</h2>
+          <button
+            onClick={reiniciarCompeticao}
+            style={{
+              padding: "12px 24px",
+              fontSize: "1rem",
+              backgroundColor: "#ff5722",
+              color: "#ffffff",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+              transition: "background-color 0.3s",
+            }}
+            onMouseOver={(e) => (e.target.style.backgroundColor = "#e64a19")}
+            onMouseOut={(e) => (e.target.style.backgroundColor = "#ff5722")}
+          >
+            Reiniciar Competição 🔄
+          </button>
+        </>
+      )}
     </div>
   );
-}
+};
+
+export default CompeticaoDados;
