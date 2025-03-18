@@ -1,3 +1,5 @@
+"use client"; // Add this directive to mark the component as a Client Component
+
 import React, { useState } from "react";
 import DadoVisual from "./components/JogoDados";
 
