@@ -16,7 +16,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-500 hover:underline">
-            Atividade 2: Jogo de dados: Componente Dado
+            Atividade 2: Jogo de dados
           </a>
         </li>
       </ul>
