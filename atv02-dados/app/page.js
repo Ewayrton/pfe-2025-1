@@ -1,18 +1,19 @@
-"use client"; // Add this directive to mark the component as a Client Component
+"use client"; // Adicione esta diretiva para marcar o componente como um Componente do Cliente
 
 import React, { useState } from "react";
 import DadoVisual from "./components/JogoDados";
 
 const CompeticaoDados = () => {
-  const [turno, setTurno] = useState(1);
+  const [rodada, setRodada] = useState(1);
   const [pontuacaoA, setPontuacaoA] = useState(0);
   const [pontuacaoB, setPontuacaoB] = useState(0);
   const [resultadoA, setResultadoA] = useState(1);
   const [resultadoB, setResultadoB] = useState(1);
   const [statusFinal, setStatusFinal] = useState("");
+  const [botaoTexto, setBotaoTexto] = useState("Jogar Dados"); // Estado para controlar o texto do botão
 
-  const proximoTurno = () => {
-    if (turno <= 5) {
+  const jogarDados = () => {
+    if (rodada <= 5) {
       const novoValorA = Math.floor(Math.random() * 6) + 1;
       const novoValorB = Math.floor(Math.random() * 6) + 1;
 
@@ -25,10 +26,15 @@ const CompeticaoDados = () => {
         setPontuacaoB(pontuacaoB + 1);
       }
 
-      setTurno(turno + 1);
+      setRodada(rodada + 1);
+
+      // Muda o texto do botão para "Jogar Novamente" após o primeiro clique
+      if (rodada === 1) {
+        setBotaoTexto("Jogar Novamente");
+      }
     }
 
-    if (turno === 5) {
+    if (rodada === 5) {
       if (pontuacaoA > pontuacaoB) {
         setStatusFinal("Competidor A é o campeão!");
       } else if (pontuacaoB > pontuacaoA) {
@@ -40,93 +46,109 @@ const CompeticaoDados = () => {
   };
 
   const reiniciarCompeticao = () => {
-    setTurno(1);
+    setRodada(1);
     setPontuacaoA(0);
     setPontuacaoB(0);
     setResultadoA(1);
     setResultadoB(1);
     setStatusFinal("");
+    setBotaoTexto("Jogar Dados"); // Reseta o texto do botão para "Jogar Dados"
   };
 
   return (
     <div
       style={{
         textAlign: "center",
-        fontFamily: "'Roboto', sans-serif",
-        backgroundColor: "#e0f7fa",
+        fontFamily: "'Poppins', sans-serif",
+        backgroundColor: "#f4f4f4",
         minHeight: "100vh",
-        padding: "20px",
+        padding: "40px 20px",
       }}
     >
-      <h1 style={{ color: "#00796b", fontSize: "2.2rem", marginBottom: "20px" }}>Competição de Dados 🎲</h1>
-      <h2 style={{ color: "#004d40", fontSize: "1.6rem", marginBottom: "20px" }}>Turno Atual: {turno <= 5 ? turno : "Fim da competição"}</h2>
+      <h1 style={{ color: "#333", fontSize: "2.5rem", marginBottom: "30px", fontWeight: "600" }}>Competição de Dados 🎲</h1>
+      <h2 style={{ color: "#555", fontSize: "1.8rem", marginBottom: "40px", fontWeight: "500" }}>Rodada Atual: {rodada <= 5 ? rodada : "Fim da competição"}</h2>
 
-      <div style={{ display: "flex", justifyContent: "center", gap: "50px", marginBottom: "30px" }}>
+      <div style={{ display: "flex", justifyContent: "center", gap: "60px", marginBottom: "40px" }}>
         <div
           style={{
             textAlign: "center",
-            padding: "15px",
-            backgroundColor: "#ffffff",
-            borderRadius: "15px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-            width: "200px",
+            padding: "20px",
+            backgroundColor: "#fff",
+            borderRadius: "20px",
+            boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+            width: "220px",
           }}
         >
-          <h3 style={{ color: "#00796b", fontWeight: "bold" }}>Competidor A</h3>
+          <h3 style={{ color: "#00796b", fontWeight: "600", marginBottom: "15px" }}>Competidor A</h3>
           <DadoVisual valor={resultadoA} />
-          <p style={{ color: "#004d40", fontSize: "1.2rem", fontWeight: "bold" }}>Pontuação: {pontuacaoA}</p>
+          <p style={{ color: "#00796b", fontSize: "1.3rem", fontWeight: "500", marginTop: "15px" }}>Pontuação: {pontuacaoA}</p>
         </div>
         <div
           style={{
             textAlign: "center",
-            padding: "15px",
-            backgroundColor: "#ffffff",
-            borderRadius: "15px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-            width: "200px",
+            padding: "20px",
+            backgroundColor: "#fff",
+            borderRadius: "20px",
+            boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+            width: "220px",
           }}
         >
-          <h3 style={{ color: "#d32f2f", fontWeight: "bold" }}>Competidor B</h3>
+          <h3 style={{ color: "#d32f2f", fontWeight: "600", marginBottom: "15px" }}>Competidor B</h3>
           <DadoVisual valor={resultadoB} />
-          <p style={{ color: "#b71c1c", fontSize: "1.2rem", fontWeight: "bold" }}>Pontuação: {pontuacaoB}</p>
+          <p style={{ color: "#d32f2f", fontSize: "1.3rem", fontWeight: "500", marginTop: "15px" }}>Pontuação: {pontuacaoB}</p>
         </div>
       </div>
 
-      {turno <= 5 ? (
+      {rodada <= 5 ? (
         <button
-          onClick={proximoTurno}
+          onClick={jogarDados}
           style={{
-            padding: "12px 24px",
-            fontSize: "1rem",
+            padding: "15px 30px",
+            fontSize: "1.1rem",
             backgroundColor: "#00796b",
-            color: "#ffffff",
+            color: "#fff",
             border: "none",
-            borderRadius: "8px",
+            borderRadius: "10px",
             cursor: "pointer",
-            transition: "background-color 0.3s",
+            transition: "background-color 0.3s, transform 0.2s",
+            fontWeight: "500",
           }}
-          onMouseOver={(e) => (e.target.style.backgroundColor = "#004d40")}
-          onMouseOut={(e) => (e.target.style.backgroundColor = "#00796b")}
+          onMouseOver={(e) => {
+            e.target.style.backgroundColor = "#004d40";
+            e.target.style.transform = "scale(1.05)";
+          }}
+          onMouseOut={(e) => {
+            e.target.style.backgroundColor = "#00796b";
+            e.target.style.transform = "scale(1)";
+          }}
         >
-          Próximo Turno 🎲
+          {botaoTexto} 🎲
         </button>
       ) : (
         <>
-          <h2 style={{ color: "#004d40", fontSize: "1.8rem", marginTop: "20px" }}>{statusFinal}</h2>
+          <h2 style={{ color: "#333", fontSize: "2rem", marginTop: "30px", fontWeight: "600" }}>{statusFinal}</h2>
           <button
             onClick={reiniciarCompeticao}
             style={{
-              padding: "12px 24px",
-              fontSize: "1rem",
+              padding: "15px 30px",
+              fontSize: "1.1rem",
               backgroundColor: "#ff5722",
-              color: "#ffffff",
+              color: "#fff",
               border: "none",
-              borderRadius: "8px",
+              borderRadius: "10px",
               cursor: "pointer",
-              transition: "background-color 0.3s",
+              transition: "background-color 0.3s, transform 0.2s",
+              fontWeight: "500",
+              marginTop: "20px",
             }}
-            onMouseOver={(e) => (e.target.style.backgroundColor = "#e64a19")}
-            onMouseOut={(e) => (e.target.style.backgroundColor = "#ff5722")}
+            onMouseOver={(e) => {
+              e.target.style.backgroundColor = "#e64a19";
+              e.target.style.transform = "scale(1.05)";
+            }}
+            onMouseOut={(e) => {
+              e.target.style.backgroundColor = "#ff5722";
+              e.target.style.transform = "scale(1)";
+            }}
           >
             Reiniciar Competição 🔄
           </button>
