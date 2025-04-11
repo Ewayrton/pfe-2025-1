@@ -1,7 +1,7 @@
 import React from "react";
 
 const DadoVisual = ({ valor }) => {
-  // Mapeando os valores para as imagens corretas na pasta public
+  // Mapeando os valores para as imagens na pasta public
   const facesDado = {
     1: "/dado1.png",
     2: "/dado2.png",
