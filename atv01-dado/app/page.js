@@ -19,6 +19,6 @@ export default function Home() {
         Jogar Dado
       </button>
     </div>
-  );  
-  
+  );
+
 }
