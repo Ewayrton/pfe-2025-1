@@ -1,5 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
+
+export const metadata = {
+  title: 'Home - Conversões Online',
+  description: 'Conversores de medidas PFE 2025.1'
+}
+
 
 export default function Home() {
   return (
@@ -30,6 +35,6 @@ export default function Home() {
             </Link>
           </li>
         </ul>
-      </main>
+     </main>
   );
 }

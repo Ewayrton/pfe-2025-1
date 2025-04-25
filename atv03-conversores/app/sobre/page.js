@@ -1,6 +1,11 @@
 import Voltar from "@/components/Voltar";
 import Image from "next/image";
 
+export const metadata = {
+  title: 'Sobre - Conversões Online',
+  description: 'Conversores de medidas PFE 2025.1'
+}
+
 export default function Sobre() {
   return (
     <div className="max-w-2xl mx-auto p-6">
