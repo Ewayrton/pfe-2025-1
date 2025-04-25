@@ -20,7 +20,7 @@ export default function Home() {
           </a>
         </li>
         <li>
-          <a href="https://atv03-conversores-git-main-ewayrtons-projects.vercel.app/"  target="_blank"
+          <a href="https://atv03-conversores.vercel.app/"  target="_blank"
             rel="noopener noreferrer"
             className="text-blue-500 hover:underline">
             Atividade 3: Conversores
