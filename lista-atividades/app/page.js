@@ -19,6 +19,13 @@ export default function Home() {
             Atividade 2: Jogo de dados
           </a>
         </li>
+        <li>
+          <a href="https://atv03-conversores-git-main-ewayrtons-projects.vercel.app/"  target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:underline">
+            Atividade 3: Conversores
+          </a>
+        </li>
       </ul>
     </div>
   );
