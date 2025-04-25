@@ -4,9 +4,9 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="p-8 space-y-4">
-        <h1 className="text-3xl font-bold">Bem-vindo ao App de Conversões!</h1>
+        <h1 className="text-3xl font-bold">Bem-vindo ao Conversões Online</h1>
         <p>
-          Este aplicativo permite converter valores entre diferentes unidades.
+          Este website permite converter valores entre diferentes unidades.
         </p>
         <ul className="space-y-2">
           <li>

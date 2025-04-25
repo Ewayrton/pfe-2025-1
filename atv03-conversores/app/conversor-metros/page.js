@@ -3,6 +3,7 @@
 'use client'
 
 import { useState } from 'react'
+import Voltar from "@/components/Voltar";
 
 export default function ConversorMetros() {
   const [metros, setMetros] = useState('')
@@ -92,6 +93,7 @@ export default function ConversorMetros() {
           onChange={alterarPolegadas}
           placeholder="Digite em polegadas"
         />
+        <Voltar />
       </div>
     </div>
   )

@@ -3,6 +3,7 @@
 'use client'
 
 import { useState } from 'react'
+import Voltar from "@/components/Voltar";
 
 export default function ConversorDolar() {
   // Taxa fixa de 14/04/2025
@@ -62,6 +63,7 @@ export default function ConversorDolar() {
       <p className="text-sm text-gray-500 mt-4">
         Taxa fixa em 14/04/2025: <strong>1 USD = {TAXA_CAMBIO} BRL</strong>
       </p>
+      <Voltar />
     </div>
   )
 }

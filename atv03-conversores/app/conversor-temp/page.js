@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Voltar from "@/components/Voltar";
 
 export default function ConversorTemp() {
   const [celsius, setCelsius] = useState('')
@@ -57,6 +58,7 @@ export default function ConversorTemp() {
           placeholder="Digite em ºF"
         />
       </div>
+      <Voltar />
     </div>
   )
 }
