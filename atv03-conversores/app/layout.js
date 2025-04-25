@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Conversor Online",
+  title: "Conversões Online",
   description: "conversor de medidas online",
 };
 
