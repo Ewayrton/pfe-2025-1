@@ -5,25 +5,22 @@ import { usePathname } from "next/navigation"
 const pageVariants = {
   initial: {
     opacity: 0,
-    y: 20,
-    scale: 0.98,
+    scale: 0.96,
   },
   in: {
     opacity: 1,
-    y: 0,
     scale: 1,
   },
   out: {
     opacity: 0,
-    y: -20,
-    scale: 1.02,
+    scale: 1.04,
   },
 }
 
 const pageTransition = {
   type: "tween",
-  ease: "anticipate",
-  duration: 0.4,
+  ease: [0.25, 0.46, 0.45, 0.94], // Curva de easing mais suave
+  duration: 0.6,
 }
 
 export default function PageTransition({ children }) {
@@ -38,6 +35,9 @@ export default function PageTransition({ children }) {
         exit="out"
         variants={pageVariants}
         transition={pageTransition}
+        style={{
+          willChange: "transform, opacity",
+        }}
       >
         {children}
       </motion.div>
