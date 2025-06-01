@@ -11,7 +11,6 @@ export default function JogoDaSenha() {
   const [won, setWon] = useState(false)
   const [showSecret, setShowSecret] = useState(false)
 
-  // Gerar código secreto aleatório
   const generateSecretCode = () => {
     const digits = []
     while (digits.length < 4) {
@@ -23,7 +22,6 @@ export default function JogoDaSenha() {
     return digits.join("")
   }
 
-  // Inicializar jogo
   const initGame = () => {
     setSecretCode(generateSecretCode())
     setGuess("")
@@ -33,17 +31,14 @@ export default function JogoDaSenha() {
     setShowSecret(false)
   }
 
-  // Calcular Bulls e Cows
   const calculateBullsAndCows = (secret, guess) => {
     let bulls = 0
     let cows = 0
-
     const secretArray = secret.split("")
     const guessArray = guess.split("")
     const usedSecret = new Array(4).fill(false)
     const usedGuess = new Array(4).fill(false)
 
-    // Contar Bulls
     for (let i = 0; i < 4; i++) {
       if (secretArray[i] === guessArray[i]) {
         bulls++
@@ -52,7 +47,6 @@ export default function JogoDaSenha() {
       }
     }
 
-    // Contar Cows
     for (let i = 0; i < 4; i++) {
       if (!usedGuess[i]) {
         for (let j = 0; j < 4; j++) {
@@ -68,7 +62,6 @@ export default function JogoDaSenha() {
     return { bulls, cows }
   }
 
-  // Validar entrada
   const isValidGuess = (input) => {
     if (input.length !== 4) return false
     if (!/^\d+$/.test(input)) return false
@@ -76,7 +69,6 @@ export default function JogoDaSenha() {
     return new Set(digits).size === 4
   }
 
-  // Fazer tentativa
   const makeGuess = () => {
     if (!isValidGuess(guess)) {
       alert("Digite 4 dígitos únicos (0-9)")
@@ -104,7 +96,6 @@ export default function JogoDaSenha() {
     setGuess("")
   }
 
-  // Mostrar código secreto
   const revealSecret = () => {
     setShowSecret(true)
     alert(`Código secreto: ${secretCode}`)
@@ -151,7 +142,6 @@ export default function JogoDaSenha() {
           initial="hidden"
           animate="visible"
         >
-          {/* Painel do Jogo */}
           <motion.div className="card-dark p-8" variants={itemVariants}>
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-green-400">Sua Tentativa</h2>
@@ -178,32 +168,23 @@ export default function JogoDaSenha() {
               </div>
             </div>
 
-            {/* Status do Jogo */}
             <div className="grid grid-cols-3 gap-4 mb-6">
-              <motion.div
-                className="bg-gray-800 p-4 rounded-lg text-center border border-gray-700"
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="text-2xl font-bold text-green-400">{attempts.length}</div>
-                <div className="text-sm text-gray-400">Tentativas</div>
-              </motion.div>
-              <motion.div
-                className="bg-gray-800 p-4 rounded-lg text-center border border-gray-700"
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="text-2xl font-bold text-orange-400">{10 - attempts.length}</div>
-                <div className="text-sm text-gray-400">Restantes</div>
-              </motion.div>
-              <motion.div
-                className="bg-gray-800 p-4 rounded-lg text-center border border-gray-700"
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="text-2xl font-bold text-purple-400">4</div>
-                <div className="text-sm text-gray-400">Dígitos</div>
-              </motion.div>
+              {["Tentativas", "Restantes", "Dígitos"].map((label, i) => (
+                <motion.div
+                  key={i}
+                  className="bg-gray-800 p-4 rounded-lg text-center border border-gray-700"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <div className="text-2xl font-bold text-green-400">
+                    {label === "Tentativas" && attempts.length}
+                    {label === "Restantes" && 10 - attempts.length}
+                    {label === "Dígitos" && 4}
+                  </div>
+                  <div className="text-sm text-gray-400">{label}</div>
+                </motion.div>
+              ))}
             </div>
 
-            {/* Input de Tentativa */}
             {!gameOver && (
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-300 mb-2">Digite 4 dígitos únicos:</label>
@@ -230,7 +211,6 @@ export default function JogoDaSenha() {
               </div>
             )}
 
-            {/* Resultado do Jogo */}
             <AnimatePresence>
               {gameOver && (
                 <motion.div
@@ -263,7 +243,6 @@ export default function JogoDaSenha() {
             </AnimatePresence>
           </motion.div>
 
-          {/* Histórico de Tentativas */}
           <motion.div className="card-dark p-8" variants={itemVariants}>
             <h2 className="text-2xl font-bold mb-6 flex items-center text-green-400">
               <Target className="mr-2" />
@@ -316,7 +295,6 @@ export default function JogoDaSenha() {
           </motion.div>
         </motion.div>
 
-        {/* Regras do Jogo */}
         <motion.div
           className="mt-12 card-dark p-8"
           initial={{ opacity: 0, y: 30 }}
@@ -328,7 +306,6 @@ export default function JogoDaSenha() {
             <div>
               <h3 className="text-lg font-semibold mb-3 text-green-300">Objetivo:</h3>
               <p className="text-gray-300 mb-4">Descobrir o código secreto de 4 dígitos únicos em até 10 tentativas.</p>
-
               <h3 className="text-lg font-semibold mb-3 text-green-300">Regras:</h3>
               <ul className="text-gray-300 space-y-2">
                 <li>• O código tem 4 dígitos diferentes (0-9)</li>
@@ -356,8 +333,7 @@ export default function JogoDaSenha() {
 
               <div className="mt-4 p-3 bg-green-900/30 rounded border border-green-700">
                 <p className="text-sm text-green-300">
-                  <strong>Exemplo:</strong> Se o código é 1234 e você chuta 1324, você terá 2 Bulls (1 e 4) e 2 Cows (3
-                  e 2).
+                  <strong>Exemplo:</strong> Se o código é 1234 e você chuta 1324, você terá 2 Bulls (1 e 4) e 2 Cows (3 e 2).
                 </p>
               </div>
             </div>

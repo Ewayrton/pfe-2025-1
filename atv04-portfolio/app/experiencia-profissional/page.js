@@ -1,4 +1,7 @@
+"use client"
+
 import { Briefcase, Calendar, MapPin } from "lucide-react"
+import { motion } from "framer-motion"
 
 export default function ExperienciaProfissional() {
   const experiences = [
@@ -65,63 +68,83 @@ export default function ExperienciaProfissional() {
     { name: "Python", level: 70 },
   ]
 
-  return (
-    <div className="min-h-screen py-16">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-8">Experiência Profissional</h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Minha trajetória profissional no desenvolvimento de software, desde os primeiros passos até as experiências
-            mais recentes.
-          </p>
-        </div>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
 
-        {/* Timeline de Experiências */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">Trajetória Profissional</h2>
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  }
+
+  return (
+    <div className="min-h-screen py-16 bg-black text-white">
+      <div className="max-w-7xl mx-auto px-4">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="text-4xl font-bold mb-8 text-green-400">Experiência Profissional</h1>
+          <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+            Minha trajetória profissional no desenvolvimento de software, desde os primeiros passos até as experiências mais recentes.
+          </p>
+        </motion.div>
+
+        <motion.div className="mb-16" variants={containerVariants} initial="hidden" animate="visible">
+          <h2 className="text-3xl font-bold mb-8 text-green-400">Trajetória Profissional</h2>
           <div className="space-y-8">
             {experiences.map((exp, index) => (
-              <div key={index} className="bg-white p-8 rounded-lg shadow-lg card-hover relative">
-                {/* Indicador de Timeline */}
-                <div className="absolute left-0 top-8 w-1 h-16 bg-blue-600 rounded"></div>
-
-                <div className="ml-8">
+              <motion.div
+                key={index}
+                className="card-dark p-8 card-hover"
+                variants={itemVariants}
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="ml-0">
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
                     <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-blue-600 mb-2">{exp.position}</h3>
-                      <h4 className="text-xl font-semibold text-gray-800 mb-2">{exp.company}</h4>
-                      <span className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                      <h3 className="text-2xl font-bold text-green-300 mb-2">{exp.position}</h3>
+                      <h4 className="text-xl font-semibold text-gray-300 mb-2">{exp.company}</h4>
+                      <span className="inline-block bg-green-900 text-green-300 px-3 py-1 rounded-full text-sm font-medium">
                         {exp.type}
                       </span>
                     </div>
                     <div className="flex flex-col md:items-end space-y-2 mt-4 md:mt-0">
-                      <div className="flex items-center text-gray-600">
+                      <div className="flex items-center text-gray-400">
                         <Calendar className="mr-2" size={16} />
                         {exp.period}
                       </div>
-                      <div className="flex items-center text-gray-600">
+                      <div className="flex items-center text-gray-400">
                         <MapPin className="mr-2" size={16} />
                         {exp.location}
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-gray-600 mb-6">{exp.description}</p>
+                  <p className="text-gray-400 mb-6">{exp.description}</p>
 
                   <div className="mb-6">
-                    <h5 className="font-semibold mb-3">Principais Responsabilidades:</h5>
+                    <h5 className="font-semibold mb-3 text-green-300">Principais Responsabilidades:</h5>
                     <ul className="grid md:grid-cols-2 gap-2">
                       {exp.responsibilities.map((resp, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <Briefcase className="mr-2 mt-1 text-blue-600 flex-shrink-0" size={16} />
-                          <span className="text-gray-600">{resp}</span>
+                        <li key={idx} className="flex items-start text-gray-300">
+                          <Briefcase className="mr-2 mt-1 text-green-500 flex-shrink-0" size={16} />
+                          <span>{resp}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
                   <div>
-                    <h5 className="font-semibold mb-3">Tecnologias Utilizadas:</h5>
+                    <h5 className="font-semibold mb-3 text-green-300">Tecnologias Utilizadas:</h5>
                     <div className="flex flex-wrap gap-2">
                       {exp.technologies.map((tech, idx) => (
                         <span key={idx} className="tech-badge">
@@ -131,45 +154,61 @@ export default function ExperienciaProfissional() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Skills */}
-        <div className="bg-gray-50 p-8 rounded-lg mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center">Habilidades Técnicas</h2>
+        <motion.div className="bg-gray-900 p-8 rounded-lg mb-16" variants={containerVariants} initial="hidden" animate="visible">
+          <h2 className="text-3xl font-bold mb-8 text-center text-green-400">Habilidades Técnicas</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {skills.map((skill, index) => (
-              <div key={index} className="bg-white p-4 rounded-lg shadow">
-                <div className="flex justify-between items-center mb-2">
+              <motion.div
+                key={index}
+                className="bg-gray-800 p-4 rounded-lg shadow"
+                variants={itemVariants}
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="flex justify-between items-center mb-2 text-gray-300">
                   <span className="font-semibold">{skill.name}</span>
-                  <span className="text-blue-600 font-bold">{skill.level}%</span>
+                  <span className="text-green-400 font-bold">{skill.level}%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-3">
+                <div className="w-full bg-gray-700 rounded-full h-3">
                   <div
-                    className="bg-blue-600 h-3 rounded-full transition-all duration-1000"
+                    className="bg-green-500 h-3 rounded-full transition-all duration-1000"
                     style={{ width: `${skill.level}%` }}
                   ></div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Call to Action */}
-        <div className="text-center bg-blue-600 text-white p-8 rounded-lg">
+        <motion.div
+          className="text-center bg-green-900 text-white p-8 rounded-lg"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-2xl font-bold mb-4">Interessado em trabalhar comigo?</h2>
           <p className="mb-6">Estou sempre aberto a novas oportunidades e desafios interessantes.</p>
           <div className="flex justify-center space-x-4">
-            <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            <motion.button
+              className="btn-secondary"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               Ver Projetos
-            </button>
-            <button className="bg-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition-colors">
+            </motion.button>
+            <motion.button
+              className="btn-primary"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               Entrar em Contato
-            </button>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   )

@@ -6,23 +6,29 @@ import { motion } from "framer-motion"
 export default function Home() {
   const [weather, setWeather] = useState(null)
   const [quote, setQuote] = useState(null)
-
-  useEffect(() => {
-    // Integração com API de clima
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=São Paulo&appid=demo&units=metric")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.main) {
-          setWeather(data)
-        }
-      })
-      .catch(() => {
+useEffect(() => {
+  fetch("https://api.openweathermap.org/data/2.fetch(`https://api.openweathermap.org/data/2.5/weather?q=São Paulo&appid=24736e151bc92b6aa048fecc2485c2ff&units=metric&lang=pt`)/weather?q=São Paulo&appid=demo&units=metric&lang=pt")
+    .then((res) => {
+      if (!res.ok) throw new Error("Falha na requisição");
+      return res.json();
+    })
+    .then((data) => {
+      if (data.main) {
         setWeather({
-          main: { temp: 25 },
-          weather: [{ description: "ensolarado" }],
-          name: "São Paulo",
-        })
-      })
+          main: { temp: data.main.temp },
+          weather: [{ description: data.weather[0].description }],
+          name: data.name,
+        });
+      }
+    })
+    .catch(() => {
+      setWeather({
+        main: { temp: 25 },
+        weather: [{ description: "ensolarado" }],
+        name: "São Paulo",
+      });
+    });
+
 
     // Integração com API de citações
     fetch("https://api.quotable.io/random?tags=technology")
@@ -63,17 +69,17 @@ export default function Home() {
         >
           <motion.div className="mb-8" variants={itemVariants}>
             <img
-              src="/placeholder.svg?height=200&width=200"
+              src="/foto perfil.jpg?height=200&width=200"
               alt="Foto de perfil"
               className="w-48 h-48 rounded-full mx-auto mb-8 border-4 border-green-400 shadow-2xl shadow-green-500/25"
             />
           </motion.div>
 
           <motion.h1 className="text-5xl font-bold mb-4" variants={itemVariants}>
-            Olá, eu sou <span className="text-green-400">Seu Nome</span>
+            Olá, eu sou <span className="text-green-400">Ewayrton Oliveira</span>
           </motion.h1>
           <motion.p className="text-xl mb-8 max-w-2xl mx-auto text-gray-300" variants={itemVariants}>
-            Desenvolvedor Full Stack apaixonado por criar soluções inovadoras com React, Next.js e tecnologias modernas.
+            Desenvolvedor Full Stack Jr. apaixonado por criar soluções inovadoras com React, Next.js e tecnologias modernas.
           </motion.p>
 
           <motion.div className="flex justify-center space-x-4 mb-8" variants={itemVariants}>
@@ -88,7 +94,7 @@ export default function Home() {
             </motion.a>
             <motion.a
               href="#"
-              className="bg-green-800 px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all duration-300 flex items-center hover:shadow-lg hover:shadow-green-500/25"
+              className="btn-primary animate-pulse-green 800 px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all duration-300 flex items-center hover:shadow-lg hover:shadow-green-500/25"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -105,16 +111,6 @@ export default function Home() {
               Contato
             </motion.a>
           </motion.div>
-
-          <motion.button
-            className="btn-primary animate-pulse-green"
-            variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Download className="mr-2" size={20} />
-            Download CV
-          </motion.button>
         </motion.div>
       </section>
 
@@ -162,7 +158,7 @@ export default function Home() {
         >
           <h2 className="text-3xl font-bold mb-12 text-green-400">Principais Tecnologias</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {["React", "Next.js", "JavaScript", "Node.js", "Python", "PostgreSQL", "Git", "AWS"].map((tech, index) => (
+            {["React", "Next.js", "JavaScript", "Java", "Python", "PostgreSQL", "Git", "Springboot"].map((tech, index) => (
               <motion.div
                 key={tech}
                 className="card-dark p-6 card-hover"

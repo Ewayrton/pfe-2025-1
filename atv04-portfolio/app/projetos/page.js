@@ -1,4 +1,7 @@
+"use client"
+
 import { Github, ExternalLink, Calendar } from "lucide-react"
+import { motion } from "framer-motion"
 
 export default function Projetos() {
   const projects = [
@@ -67,56 +70,90 @@ export default function Projetos() {
 
   const categories = ["Todos", "Full Stack", "Frontend", "Backend", "Mobile"]
 
-  return (
-    <div className="min-h-screen py-16">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-8">Projetos Desenvolvidos</h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Uma seleção dos meus principais projetos, demonstrando diferentes tecnologias e habilidades de
-            desenvolvimento.
-          </p>
-        </div>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  }
 
-        {/* Filtros */}
-        <div className="flex justify-center mb-12">
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  }
+
+  return (
+    <div className="min-h-screen py-16 bg-black text-white">
+      <div className="max-w-7xl mx-auto px-4">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="text-4xl font-bold mb-8 text-green-400">Projetos Desenvolvidos</h1>
+          <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+            Uma seleção dos meus principais projetos, demonstrando diferentes tecnologias e habilidades de desenvolvimento.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="flex justify-center mb-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
           <div className="flex flex-wrap gap-4">
             {categories.map((category) => (
-              <button
+              <motion.button
                 key={category}
-                className="px-6 py-2 rounded-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-colors"
+                className="px-6 py-2 rounded-full border-2 border-green-500 text-green-400 hover:bg-green-500 hover:text-black transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 {category}
-              </button>
+              </motion.button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Grid de Projetos */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {projects.map((project, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
-              <img src={project.image || "/placeholder.svg"} alt={project.title} className="w-full h-48 object-cover" />
+            <motion.div
+              key={index}
+              className="bg-gray-900 rounded-lg shadow-lg overflow-hidden card-hover"
+              variants={itemVariants}
+              whileHover={{ scale: 1.02 }}
+            >
+              <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
 
               <div className="p-6">
                 <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-bold">{project.title}</h3>
-                  <div className="flex items-center text-gray-500 text-sm">
+                  <h3 className="text-xl font-bold text-green-300">{project.title}</h3>
+                  <div className="flex items-center text-gray-400 text-sm">
                     <Calendar className="mr-1" size={14} />
                     {project.date}
                   </div>
                 </div>
 
-                <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mb-3">
+                <span className="inline-block bg-green-900 text-green-300 px-3 py-1 rounded-full text-sm font-medium mb-3">
                   {project.category}
                 </span>
 
-                <p className="text-gray-600 mb-4">{project.description}</p>
+                <p className="text-gray-400 mb-4">{project.description}</p>
 
                 <div className="mb-4">
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, idx) => (
-                      <span key={idx} className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm">
+                      <span key={idx} className="bg-gray-800 text-gray-300 px-2 py-1 rounded text-sm">
                         {tech}
                       </span>
                     ))}
@@ -126,7 +163,7 @@ export default function Projetos() {
                 <div className="flex space-x-3">
                   <a
                     href={project.github}
-                    className="flex items-center text-gray-600 hover:text-blue-600 transition-colors"
+                    className="flex items-center text-gray-400 hover:text-green-400 transition-colors"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -136,7 +173,7 @@ export default function Projetos() {
                   {project.demo && (
                     <a
                       href={project.demo}
-                      className="flex items-center text-gray-600 hover:text-blue-600 transition-colors"
+                      className="flex items-center text-gray-400 hover:text-green-400 transition-colors"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -146,49 +183,57 @@ export default function Projetos() {
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Estatísticas */}
-        <div className="bg-gray-50 p-8 rounded-lg">
-          <h2 className="text-3xl font-bold text-center mb-8">Estatísticas dos Projetos</h2>
+        <motion.div
+          className="bg-gray-900 p-8 rounded-lg"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+        >
+          <h2 className="text-3xl font-bold text-center mb-8 text-green-400">Estatísticas dos Projetos</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="bg-white p-6 rounded-lg shadow">
-              <div className="text-3xl font-bold text-blue-600 mb-2">15+</div>
-              <div className="text-gray-600">Projetos Concluídos</div>
+            <div className="bg-gray-800 p-6 rounded-lg shadow">
+              <div className="text-3xl font-bold text-green-400 mb-2">15+</div>
+              <div className="text-gray-300">Projetos Concluídos</div>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow">
-              <div className="text-3xl font-bold text-green-600 mb-2">8+</div>
-              <div className="text-gray-600">Tecnologias Dominadas</div>
+            <div className="bg-gray-800 p-6 rounded-lg shadow">
+              <div className="text-3xl font-bold text-green-400 mb-2">8+</div>
+              <div className="text-gray-300">Tecnologias Dominadas</div>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow">
-              <div className="text-3xl font-bold text-purple-600 mb-2">1000+</div>
-              <div className="text-gray-600">Commits no GitHub</div>
+            <div className="bg-gray-800 p-6 rounded-lg shadow">
+              <div className="text-3xl font-bold text-green-400 mb-2">1000+</div>
+              <div className="text-gray-300">Commits no GitHub</div>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow">
-              <div className="text-3xl font-bold text-orange-600 mb-2">2+</div>
-              <div className="text-gray-600">Anos de Experiência</div>
+            <div className="bg-gray-800 p-6 rounded-lg shadow">
+              <div className="text-3xl font-bold text-green-400 mb-2">2+</div>
+              <div className="text-gray-300">Anos de Experiência</div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <h2 className="text-2xl font-bold mb-4">Quer ver mais projetos?</h2>
-          <p className="text-gray-600 mb-6">
+        <motion.div
+          className="text-center mt-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+        >
+          <h2 className="text-2xl font-bold mb-4 text-green-400">Quer ver mais projetos?</h2>
+          <p className="text-gray-400 mb-6">
             Confira meu GitHub para ver todos os projetos e contribuições open source.
           </p>
           <a
             href="https://github.com/usuario"
-            className="inline-flex items-center bg-gray-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center bg-gray-900 text-green-400 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors border border-green-500"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Github className="mr-2" size={20} />
             Ver GitHub Completo
           </a>
-        </div>
+        </motion.div>
       </div>
     </div>
   )
