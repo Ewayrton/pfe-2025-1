@@ -324,7 +324,7 @@ export default function JogoDaSenha() {
                   <span className="text-gray-300">Dígito correto na posição correta</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <span className="bg-orange-900 text-orange-300 px-4 py-1 rounded font-semibold border border-orange-700">
+                  <span className="bg-orange-900 text-orange-300 px-5 py-1 rounded font-semibold border border-orange-700">
                     Semi-Acertos
                   </span>
                   <span className="text-gray-300">Dígito correto na posição errada</span>
