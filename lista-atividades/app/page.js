@@ -26,6 +26,13 @@ export default function Home() {
             Atividade 3: Conversores
           </a>
         </li>
+        <li>
+          <a href="https://portfolio-tan-omega-45.vercel.app/"  target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:underline">
+            Atividade 4: Portfólio
+          </a>
+        </li>
       </ul>
     </div>
   );
