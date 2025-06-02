@@ -10,8 +10,8 @@ export default function Navbar() {
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/sobre", label: "Sobre" },
-    { href: "/experiencia-academica", label: "Acadêmica" },
-    { href: "/experiencia-profissional", label: "Profissional" },
+    { href: "/experiencia-academica", label: "Formação Acadêmica" },
+    { href: "/experiencia-profissional", label: "Experiência Profissional" },
     { href: "/projetos", label: "Projetos" },
     { href: "/jogo", label: "Jogo" },
   ]

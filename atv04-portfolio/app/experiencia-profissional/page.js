@@ -6,54 +6,55 @@ import { motion } from "framer-motion"
 export default function ExperienciaProfissional() {
   const experiences = [
     {
-      position: "Desenvolvedor Full Stack Jr.",
-      company: "TechSolutions Ltda",
-      period: "Jan 2024 - Presente",
-      location: "São Paulo, SP",
-      type: "Tempo Integral",
+      position: "Residente em Software (Banco de Dados)",
+      company: "Ferreira Costa",
+      period: "Jan 2025 - Jun 2025",
+      location: "Recife, PE",
+      type: "Residência Técnica",
       description:
-        "Desenvolvimento de aplicações web utilizando React, Next.js e Node.js. Responsável pela criação de interfaces modernas e APIs robustas.",
+        "Participação em programa de residência em software com foco em SQL e PL/SQL, colaborando na manutenção e otimização de bases de dados corporativas.",
       responsibilities: [
-        "Desenvolvimento de componentes React reutilizáveis",
-        "Criação de APIs REST com Node.js e Express",
-        "Integração com bancos de dados PostgreSQL",
-        "Implementação de testes unitários e de integração",
-        "Colaboração em equipe usando metodologias ágeis",
+        "Criação e manutenção de procedimentos armazenados com PL/SQL",
+        "Consultas e manipulação de dados em SQL",
+        "Análise de desempenho e otimização de queries",
+        "Colaboração com equipe de TI para integração de sistemas",
+        "Documentação técnica de processos de banco de dados",
       ],
-      technologies: ["React", "Next.js", "Node.js", "PostgreSQL", "Git", "AWS"],
+      technologies: ["SQL", "PL/SQL", "Oracle", "Git", "Linux"],
     },
     {
-      position: "Estagiário em Desenvolvimento Web",
-      company: "StartupTech",
-      period: "Jun 2023 - Dez 2023",
-      location: "São Paulo, SP",
-      type: "Estágio",
+      position: "Recepcionista Hospitalar",
+      company: "Hospital Memorial São José (Rede D'Or São Luiz)",
+      period: "2019 - 2022",
+      location: "Recife, PE",
+      type: "CLT",
       description:
-        "Primeiro contato profissional com desenvolvimento web, focando em frontend com React e aprendendo boas práticas de desenvolvimento.",
+        "Atendimento ao público, organização de prontuários e suporte a processos administrativos em ambiente hospitalar de alta demanda.",
       responsibilities: [
-        "Desenvolvimento de interfaces com React",
-        "Manutenção e correção de bugs",
-        "Participação em code reviews",
-        "Documentação de código e processos",
-        "Suporte técnico para usuários internos",
+        "Atendimento presencial e telefônico de pacientes",
+        "Agendamento de exames e encaminhamentos",
+        "Organização de documentos e registros",
+        "Apoio à equipe de enfermagem e triagem",
+        "Controle de fluxo de entrada e saída de visitantes",
       ],
-      technologies: ["React", "JavaScript", "CSS3", "Git", "Figma"],
+      technologies: ["Sistema Interno Hospitalar", "Excel", "Comunicação", "Organização"],
     },
     {
-      position: "Freelancer - Desenvolvedor Web",
-      company: "Autônomo",
-      period: "Mar 2023 - Mai 2023",
-      location: "Remoto",
-      type: "Freelance",
-      description: "Desenvolvimento de sites institucionais e landing pages para pequenas empresas locais.",
+      position: "Recepcionista",
+      company: "SEOPE - Serviço de Olhos de Pernambuco",
+      period: "2017 - 2019",
+      location: "Recife, PE",
+      type: "CLT",
+      description:
+        "Recepção de pacientes, atualização de fichas médicas e suporte administrativo em clínica oftalmológica.",
       responsibilities: [
-        "Criação de sites responsivos",
-        "Otimização para SEO",
-        "Integração com formulários de contato",
-        "Hospedagem e manutenção de sites",
-        "Atendimento direto ao cliente",
+        "Recepção e cadastro de pacientes",
+        "Organização de fichas médicas",
+        "Controle de agendas médicas",
+        "Auxílio na triagem e atendimento humanizado",
+        "Comunicação com convênios e operadoras de saúde",
       ],
-      technologies: ["HTML5", "CSS3", "JavaScript", "WordPress", "PHP"],
+      technologies: ["Sistemas Clínicos", "Comunicação", "Atendimento ao Cliente"],
     },
   ]
 
@@ -94,7 +95,7 @@ export default function ExperienciaProfissional() {
         >
           <h1 className="text-4xl font-bold mb-8 text-green-400">Experiência Profissional</h1>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-            Minha trajetória profissional no desenvolvimento de software, desde os primeiros passos até as experiências mais recentes.
+            Um panorama da minha experiência profissional em tecnologia e atendimento, destacando competências técnicas e habilidades interpessoais desenvolvidas ao longo do tempo.
           </p>
         </motion.div>
 

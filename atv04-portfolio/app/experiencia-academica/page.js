@@ -6,41 +6,65 @@ import { motion } from "framer-motion"
 export default function ExperienciaAcademica() {
   const education = [
     {
-      degree: "Bacharelado em Ciência da Computação",
-      institution: "Universidade Federal de São Paulo",
-      period: "2021 - 2025",
-      location: "São Paulo, SP",
+      degree: "Curso Superior de Tecnologia em Sistemas para Internet",
+      institution: "Universidade Católica de Pernambuco (UNICAP)",
+      period: "2024 - Atual",
+      location: "Recife, PE",
       description:
-        "Formação sólida em programação, algoritmos, estruturas de dados, engenharia de software e desenvolvimento web.",
+        "Curso focado em desenvolvimento web full stack, com ênfase em tecnologias modernas, banco de dados, segurança e práticas de desenvolvimento ágil.",
       highlights: [
-        "Desenvolvimento de projetos em React e Next.js",
-        "Estudos em Inteligência Artificial e Machine Learning",
-        "Participação em projetos de extensão universitária",
-        "Monitor da disciplina de Programação Web",
+        "Projetos acadêmicos utilizando React, Next.js e Java com Springboot",
+        "Desenvolvimento de APIs REST com Spring Boot",
+        "Práticas de versionamento com Git e GitHub",
+        "Metodologias ágeis e boas práticas de codificação",
       ],
     },
     {
-      degree: "Técnico em Informática",
-      institution: "ETEC - Escola Técnica Estadual",
-      period: "2019 - 2020",
-      location: "São Paulo, SP",
-      description: "Formação técnica em desenvolvimento de sistemas, banco de dados e redes de computadores.",
+      degree: "Curso Backend Java com Spring Boot",
+      institution: "Curso Livre - Plataforma online",
+      period: "2025",
+      location: "Remoto",
+      description: "Formação prática no desenvolvimento de APIs RESTful com Java e Spring Boot.",
       highlights: [
-        "Desenvolvimento de sistemas desktop com Java",
-        "Administração de banco de dados MySQL",
-        "Configuração de redes e servidores",
-        "Projeto final: Sistema de gestão escolar",
+        "Criação de APIs seguras com autenticação JWT",
+        "Integração com banco de dados PostgreSQL",
+        "Deploy de aplicações Java com Docker",
+        "Uso de Spring Data e Spring Security",
+      ],
+    },
+    {
+      degree: "Curso de Frontend com React, Next.js e JavaScript",
+      institution: "Softex Recife",
+      period: "2025 - Atual",
+      location: "Recife, PE",
+      description: "Capacitação em desenvolvimento frontend moderno, com foco em componentização, rotas dinâmicas e consumo de APIs.",
+      highlights: [
+        "Criação de interfaces com React e Tailwind CSS",
+        "Navegação com Next.js e SSR",
+        "Consumo de APIs REST",
+        "Boas práticas em JavaScript moderno",
+      ],
+    },
+    {
+      degree: "Curso de Digitação",
+      institution: "Curso Livre",
+      period: "Concluído",
+      location: "Recife, PE",
+      description: "Curso de aperfeiçoamento em velocidade e precisão de digitação.",
+      highlights: [
+        "Melhoria de produtividade com teclado",
+        "Prática de ergonomia digital",
+        "Treinamentos com foco em fluidez",
+        "Exercícios diários de agilidade",
       ],
     },
   ]
 
   const courses = [
-    "Desenvolvimento Web Completo - Udemy",
-    "React: The Complete Guide - Udemy",
-    "Node.js: The Complete Guide - Udemy",
-    "AWS Cloud Practitioner - Amazon",
+    "React e NextJs: The Complete Guide - Softex",
+    "Node.js: The Complete Guide - RocketSeat",
     "Git e GitHub - Curso em Vídeo",
-    "Python para Data Science - Alura",
+    "Java e Springboot - Alura",
   ]
 
   const containerVariants = {
@@ -67,14 +91,14 @@ export default function ExperienciaAcademica() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-4xl font-bold mb-8 text-green-400">Experiência Acadêmica</h1>
+          <h1 className="text-4xl font-bold mb-8 text-green-400">Formação Acadêmica</h1>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-            Minha jornada educacional e desenvolvimento de conhecimentos técnicos ao longo dos anos de estudo e aprendizado contínuo.
+            Uma visão geral da minha jornada educacional, destacando as formações técnicas e superiores que moldaram meu conhecimento em desenvolvimento de software.
           </p>
         </motion.div>
 
         <motion.div className="mb-16" variants={containerVariants} initial="hidden" animate="visible">
-          <h2 className="text-3xl font-bold mb-8 text-green-400">Formação Acadêmica</h2>
+          <h2 className="text-3xl font-bold mb-8 text-green-400">Instituições & Certificações</h2>
           <div className="space-y-8">
             {education.map((edu, index) => (
               <motion.div
@@ -119,7 +143,7 @@ export default function ExperienciaAcademica() {
         </motion.div>
 
         <motion.div className="bg-gray-900 p-8 rounded-lg mb-16" variants={containerVariants} initial="hidden" animate="visible">
-          <h2 className="text-3xl font-bold mb-8 text-center text-green-400">Cursos e Certificações</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center text-green-400">Cursos e Certificações Adicionais</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {courses.map((course, index) => (
               <motion.div
@@ -139,10 +163,10 @@ export default function ExperienciaAcademica() {
 
         <motion.div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center" variants={containerVariants} initial="hidden" animate="visible">
           {[
-            { label: "Anos de Estudo", value: "4+" },
-            { label: "Projetos Acadêmicos", value: "15+" },
-            { label: "Certificações", value: "8+" },
-            { label: "CRA Atual", value: "3.8" },
+            { label: "Anos de Estudo", value: "2+" },
+            { label: "Projetos Acadêmicos", value: "10+" },
+            { label: "Certificações", value: "2+" },
+            { label: "CRA Atual", value: "8.8" },
           ].map((stat, index) => (
             <motion.div
               key={index}

@@ -4,32 +4,9 @@ import { Github, Linkedin, Mail, Download, MapPin } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function Home() {
-  const [weather, setWeather] = useState(null)
+  const [showContact, setShowContact] = useState(false)
   const [quote, setQuote] = useState(null)
 useEffect(() => {
-  fetch("https://api.openweathermap.org/data/2.fetch(`https://api.openweathermap.org/data/2.5/weather?q=São Paulo&appid=24736e151bc92b6aa048fecc2485c2ff&units=metric&lang=pt`)/weather?q=São Paulo&appid=demo&units=metric&lang=pt")
-    .then((res) => {
-      if (!res.ok) throw new Error("Falha na requisição");
-      return res.json();
-    })
-    .then((data) => {
-      if (data.main) {
-        setWeather({
-          main: { temp: data.main.temp },
-          weather: [{ description: data.weather[0].description }],
-          name: data.name,
-        });
-      }
-    })
-    .catch(() => {
-      setWeather({
-        main: { temp: 25 },
-        weather: [{ description: "ensolarado" }],
-        name: "São Paulo",
-      });
-    });
-
-
     // Integração com API de citações
     fetch("https://api.quotable.io/random?tags=technology")
       .then((res) => res.json())
@@ -84,7 +61,7 @@ useEffect(() => {
 
           <motion.div className="flex justify-center space-x-4 mb-8" variants={itemVariants}>
             <motion.a
-              href="#"
+              href ="https://github.com/Ewayrton" target="_blank"
               className="bg-gray-900 text-green-400 px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-all duration-300 flex items-center border border-gray-700 hover:border-green-500 hover:shadow-lg hover:shadow-green-500/25"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -93,7 +70,7 @@ useEffect(() => {
               GitHub
             </motion.a>
             <motion.a
-              href="#"
+              href="https://www.linkedin.com/in/ewayrton-oliveira/" target="_blank"
               className="btn-primary animate-pulse-green 800 px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all duration-300 flex items-center hover:shadow-lg hover:shadow-green-500/25"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -101,15 +78,15 @@ useEffect(() => {
               <Linkedin className="mr-2" size={20} />
               LinkedIn
             </motion.a>
-            <motion.a
-              href="#"
-              className="bg-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-all duration-300 flex items-center border border-gray-600 hover:border-green-500 hover:shadow-lg hover:shadow-green-500/25"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <motion.button
+               onClick={() => setShowContact(true)}
+               className="bg-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-all duration-300 flex items-center border border-gray-600 hover:border-green-500 hover:shadow-lg hover:shadow-green-500/25"
+               whileHover={{ scale: 1.05 }}
+               whileTap={{ scale: 0.95 }}
+>
               <Mail className="mr-2" size={20} />
               Contato
-            </motion.a>
+            </motion.button>
           </motion.div>
         </motion.div>
       </section>
@@ -123,19 +100,6 @@ useEffect(() => {
           transition={{ delay: 0.5, duration: 0.6 }}
         >
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Weather Card */}
-            {weather && (
-              <motion.div className="card-dark p-6 card-hover" whileHover={{ scale: 1.02 }}>
-                <h3 className="text-xl font-bold mb-4 flex items-center text-green-400">
-                  <MapPin className="mr-2" />
-                  Clima Atual
-                </h3>
-                <p className="text-gray-300">
-                  {weather.name}: {Math.round(weather.main.temp)}°C, {weather.weather[0].description}
-                </p>
-              </motion.div>
-            )}
-
             {/* Quote Card */}
             {quote && (
               <motion.div className="card-dark p-6 card-hover" whileHover={{ scale: 1.02 }}>
@@ -176,6 +140,34 @@ useEffect(() => {
           </div>
         </motion.div>
       </section>
+      {showContact && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+         <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          className="bg-gray-900 p-8 rounded-lg shadow-lg border border-green-500 max-w-sm w-full text-center"
+        >
+       <h2 className="text-xl font-bold text-green-400 mb-4">Entre em Contato</h2>
+       <p className="text-gray-300 mb-4">📧 ewayrton.unicap@gmail.com</p>
+       <a
+           href="https://wa.me/5581997657027?text=Ol%C3%A1%20Ewayrton%2C%20vim%20pelo%20seu%20portf%C3%B3lio!"
+           target="_blank"
+           rel="noopener noreferrer"
+           className="btn-primary mb-4 inline-block"
+         >
+        Mandar Mensagem no WhatsApp
+        </a>
+          <button
+              onClick={() => setShowContact(false)}
+             className="text-gray-400 hover:text-red-400 transition-colors mt-2"
+           >
+            Fechar
+          </button>
+       </motion.div>
+      </div>
+    )}
     </div>
+    
   )
 }

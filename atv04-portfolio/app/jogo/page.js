@@ -131,7 +131,7 @@ export default function JogoDaSenha() {
         >
           <h1 className="text-4xl font-bold mb-4 text-green-400">🎯 Jogo da Senha</h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Descubra o código secreto de 4 dígitos únicos! Bulls = dígito correto na posição correta. Cows = dígito
+            Descubra o código secreto de 4 dígitos únicos! Acertos = dígito correto na posição correta. Semi-acertos = dígito
             correto na posição errada.
           </p>
         </motion.div>
@@ -279,11 +279,11 @@ export default function JogoDaSenha() {
                         <div className="flex space-x-4">
                           <div className="text-center">
                             <div className="text-lg font-bold text-green-400">{attempt.bulls}</div>
-                            <div className="text-xs text-gray-500">Bulls</div>
+                            <div className="text-xs text-gray-500">Acertos</div>
                           </div>
                           <div className="text-center">
                             <div className="text-lg font-bold text-orange-400">{attempt.cows}</div>
-                            <div className="text-xs text-gray-500">Cows</div>
+                            <div className="text-xs text-gray-500">Semi-acertos</div>
                           </div>
                         </div>
                       </div>
@@ -318,14 +318,14 @@ export default function JogoDaSenha() {
               <h3 className="text-lg font-semibold mb-3 text-green-300">Feedback:</h3>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
-                  <span className="bg-green-900 text-green-300 px-3 py-1 rounded font-semibold border border-green-700">
-                    Bulls
+                  <span className="bg-green-900 text-green-300 px-4 py-1 rounded font-semibold border border-green-700">
+                    Acertos
                   </span>
                   <span className="text-gray-300">Dígito correto na posição correta</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <span className="bg-orange-900 text-orange-300 px-3 py-1 rounded font-semibold border border-orange-700">
-                    Cows
+                  <span className="bg-orange-900 text-orange-300 px-4 py-1 rounded font-semibold border border-orange-700">
+                    Semi-Acertos
                   </span>
                   <span className="text-gray-300">Dígito correto na posição errada</span>
                 </div>
@@ -333,7 +333,7 @@ export default function JogoDaSenha() {
 
               <div className="mt-4 p-3 bg-green-900/30 rounded border border-green-700">
                 <p className="text-sm text-green-300">
-                  <strong>Exemplo:</strong> Se o código é 1234 e você chuta 1324, você terá 2 Bulls (1 e 4) e 2 Cows (3 e 2).
+                  <strong>Exemplo:</strong> Se o código é 1234 e você chuta 1324, você terá 2 Acertos (1 e 4) e 2 Semi-acertos (3 e 2).
                 </p>
               </div>
             </div>
