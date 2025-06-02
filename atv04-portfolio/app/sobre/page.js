@@ -5,32 +5,37 @@ import { Code, Cpu, Database, Cloud } from "lucide-react"
 
 export default function Sobre() {
   const technologies = [
-    {
-      category: "Frontend",
-      icon: Code,
-      items: ["React", "Next.js", "JavaScript", "HTML5", "CSS3", "Tailwind CSS"],
-    },
-    {
-      category: "Backend",
-      icon: Cpu,
-      items: ["Node.js", "Express", "API REST"],
-    },
-    {
-      category: "Banco de Dados",
-      icon: Database,
-      items: ["PostgreSQL"],
-    },
-    {
-      category: "DevOps & Ferramentas",
-      icon: Cloud,
-      items: ["Git", "Vercel", "VS Code"],
-    },
-    {
-      category: "APIs Integradas",
-      icon: Cloud,
-      items: ["Quotable API", "OpenWeather API"],
-    },
-  ]
+  {
+    category: "Frontend",
+    icon: Code,
+    items: ["React", "Next.js", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Framer Motion"],
+  },
+  {
+    category: "Backend",
+    icon: Cpu,
+    items: ["Node.js", "Express", "API REST"],
+  },
+  {
+    category: "Banco de Dados",
+    icon: Database,
+    items: ["PostgreSQL"],
+  },
+  {
+    category: "DevOps & Ferramentas",
+    icon: Cloud,
+    items: ["Git", "Vercel", "VS Code"],
+  },
+  {
+    category: "APIs Integradas",
+    icon: Cloud,
+    items: ["Quotable API", "Argos Translate API (LibreTranslate)"],
+  },
+  {
+    category: "Bibliotecas",
+    icon: Code,
+    items: ["Lucide React"],
+  },
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },

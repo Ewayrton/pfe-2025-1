@@ -7,17 +7,32 @@ export default function Home() {
   const [showContact, setShowContact] = useState(false)
   const [quote, setQuote] = useState(null)
 useEffect(() => {
-    // Integração com API de citações
-    fetch("https://api.quotable.io/random?tags=technology")
-      .then((res) => res.json())
-      .then((data) => setQuote(data))
-      .catch(() => {
-        setQuote({
-          content: "A tecnologia é melhor quando aproxima as pessoas.",
-          author: "Matt Mullenweg",
+  fetch("https://api.quotable.io/random?tags=technology")
+    .then((res) => res.json())
+    .then((data) => {
+      // Usando MyMemory API como alternativa
+      fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(data.content)}&langpair=en|pt`)
+        .then((res) => res.json())
+        .then(translated => {
+          setQuote({
+            content: translated.responseData?.translatedText || data.content,
+            author: data.author
+          });
         })
-      })
-  }, [])
+        .catch(() => {
+          setQuote({
+            content: data.content,
+            author: data.author
+          });
+        });
+    })
+    .catch(() => {
+      setQuote({
+        content: "A tecnologia é melhor quando aproxima as pessoas.",
+        author: "Matt Mullenweg",
+      });
+    });
+}, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },

@@ -2,80 +2,94 @@
 
 import { Github, ExternalLink, Calendar } from "lucide-react"
 import { motion } from "framer-motion"
+import { useState } from 'react'
 
 export default function Projetos() {
+  const [selectedCategory, setSelectedCategory] = useState("Todos")
+
   const projects = [
     {
-      title: "E-commerce Completo",
-      description:
-        "Plataforma de e-commerce desenvolvida com Next.js, incluindo carrinho de compras, sistema de pagamento e painel administrativo.",
-      image: "/placeholder.svg?height=300&width=400",
-      technologies: ["Next.js", "React", "Node.js", "PostgreSQL", "Stripe"],
-      github: "https://github.com/usuario/ecommerce",
-      demo: "https://ecommerce-demo.vercel.app",
-      date: "2024",
-      category: "Full Stack",
-    },
-    {
-      title: "Dashboard Analytics",
-      description: "Dashboard interativo para visualização de dados com gráficos dinâmicos e relatórios em tempo real.",
-      image: "/placeholder.svg?height=300&width=400",
-      technologies: ["React", "Chart.js", "Express", "MongoDB"],
-      github: "https://github.com/usuario/dashboard",
-      demo: "https://dashboard-demo.vercel.app",
+      title: "Meu Portfólio",
+      description: "Meu portfólio pessoal desenvolvido com Next.js, mostrando meus projetos e habilidades.",
+      image: "/img-projetos/portfolio.png",
+      technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
+      github: "https://github.com/Ewayrton/pfe-2025-1/tree/main/atv04-portfolio",
+      demo: "https://portfolio-tan-omega-45.vercel.app/",
       date: "2024",
       category: "Frontend",
     },
     {
-      title: "API REST Completa",
-      description: "API robusta com autenticação JWT, documentação Swagger e testes automatizados.",
-      image: "/placeholder.svg?height=300&width=400",
-      technologies: ["Node.js", "Express", "PostgreSQL", "JWT", "Swagger"],
-      github: "https://github.com/usuario/api-rest",
-      demo: null,
-      date: "2023",
-      category: "Backend",
+      title: "Dashboard",
+      description: "Projeto final (DASHBOARD) da disciplina de Programação Web, demonstrando conceitos aprendidos.",
+      image: "/img-projetos/projetoFinal.png",
+      technologies: ["HTML5", "CSS3", "JavaScript"],
+      github: "https://github.com/Ewayrton/projetoFinal-programacaoWeb-2024.2/tree/main/DASHBOARD",
+      demo: "https://projeto-final-programacao-web-2024-2-six.vercel.app/",
+      date: "2024",
+      category: "Frontend",
     },
     {
-      title: "App Mobile React Native",
-      description: "Aplicativo mobile para gerenciamento de tarefas com sincronização em nuvem.",
-      image: "/placeholder.svg?height=300&width=400",
-      technologies: ["React Native", "Expo", "Firebase", "AsyncStorage"],
-      github: "https://github.com/usuario/mobile-app",
-      demo: null,
-      date: "2023",
-      category: "Mobile",
-    },
-    {
-      title: "Sistema de Blog",
-      description: "CMS personalizado para blogs com editor rich text e sistema de comentários.",
-      image: "/placeholder.svg?height=300&width=400",
-      technologies: ["Next.js", "Prisma", "PostgreSQL", "TinyMCE"],
-      github: "https://github.com/usuario/blog-cms",
-      demo: "https://blog-demo.vercel.app",
-      date: "2023",
+      title: "Jogo de Dados",
+      description: "Projeto para resolução de atividade da disciplina de programação frontEnd.",
+      image: "/img-projetos/jogoDeDados.png",
+      technologies: ["Next.js", "React", "Node.js"],
+      github: "https://github.com/Ewayrton/pfe-2025-1/tree/main/atv02-dados",
+      demo: "https://dadosss-nine.vercel.app/",
+      date: "2024",
       category: "Full Stack",
     },
     {
-      title: "Jogo da Senha",
-      description: "Implementação do clássico jogo Bulls and Cows com interface moderna e sistema de pontuação.",
-      image: "/placeholder.svg?height=300&width=400",
-      technologies: ["React", "JavaScript", "CSS3", "Local Storage"],
-      github: "https://github.com/usuario/jogo-senha",
-      demo: "/jogo",
+      title: "Sorteador",
+      description: "Aplicação para sorteio de números ou nomes com configurações personalizáveis.",
+      image: "/img-projetos/sorteador.png",
+      technologies: ["HTML5", "CSS3", "JavaScript"],
+      github: "https://github.com/deivysonjds/sorteador",
+      demo: "https://sorteador-indol.vercel.app/index.html",
+      date: "2023",
+      category: "Frontend",
+    },  
+    {
+      title: "Calculadora de Imposto",
+      description: "Ferramenta para cálculo de impostos com diferentes parâmetros e alíquotas.",
+      image: "/img-projetos/calculadoraIR.png",
+      technologies: ["HTML5", "CSS3", "JavaScript"],
+      github: "https://github.com/Ewayrton/Programacao-Para-Web-2024.2/tree/main/atv-imposto-de-renda",
+      demo: "https://calculadoraimposto2024.vercel.app/",
       date: "2024",
+      category: "Frontend",
+    },
+    {
+      title: "Conversores",
+      description: "Aplicação web para conversão de unidades e moedas com interface intuitiva.",
+      image: "/img-projetos/conversores.png",
+      technologies: ["HTML5", "CSS3", "JavaScript"],
+      github: "https://github.com/Ewayrton/pfe-2025-1/tree/main/atv03-conversores",
+      demo: "https://atv03-conversores.vercel.app/",
+      date: "2023",
       category: "Frontend",
     },
   ]
 
   const categories = ["Todos", "Full Stack", "Frontend", "Backend", "Mobile"]
 
+  const filteredProjects = selectedCategory === "Todos" 
+    ? projects 
+    : projects.filter(project => project.category === selectedCategory)
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1,
+        when: "beforeChildren",
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        staggerChildren: 0.05,
+        staggerDirection: -1,
       },
     },
   }
@@ -110,9 +124,14 @@ export default function Projetos() {
             {categories.map((category) => (
               <motion.button
                 key={category}
-                className="px-6 py-2 rounded-full border-2 border-green-500 text-green-400 hover:bg-green-500 hover:text-black transition-colors"
+                className={`px-6 py-2 rounded-full border-2 ${
+                  selectedCategory === category
+                    ? "bg-green-500 text-black border-green-500"
+                    : "border-green-500 text-green-400 hover:bg-green-500 hover:text-black"
+                } transition-colors`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => setSelectedCategory(category)}
               >
                 {category}
               </motion.button>
@@ -125,15 +144,25 @@ export default function Projetos() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
+          exit="exit"
+          key={selectedCategory}
         >
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <motion.div
               key={index}
               className="bg-gray-900 rounded-lg shadow-lg overflow-hidden card-hover"
               variants={itemVariants}
               whileHover={{ scale: 1.02 }}
             >
-              <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
+              <img 
+                src={project.image} 
+                alt={project.title} 
+                className="w-full h-48 object-cover"
+                onError={(e) => {
+                  e.target.src = '/img-projetos/default.png'
+                  e.target.alt = 'Imagem não disponível'
+                }}
+              />
 
               <div className="p-6">
                 <div className="flex justify-between items-start mb-3">
@@ -178,7 +207,7 @@ export default function Projetos() {
                       rel="noopener noreferrer"
                     >
                       <ExternalLink className="mr-1" size={16} />
-                      Demo
+                      Site
                     </a>
                   )}
                 </div>
@@ -186,6 +215,18 @@ export default function Projetos() {
             </motion.div>
           ))}
         </motion.div>
+
+        {filteredProjects.length === 0 && (
+          <motion.div
+            className="text-center py-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <p className="text-xl text-gray-400">
+              Nenhum projeto encontrado nesta categoria.
+            </p>
+          </motion.div>
+        )}
 
         <motion.div
           className="bg-gray-900 p-8 rounded-lg"
@@ -196,7 +237,7 @@ export default function Projetos() {
           <h2 className="text-3xl font-bold text-center mb-8 text-green-400">Estatísticas dos Projetos</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="bg-gray-800 p-6 rounded-lg shadow">
-              <div className="text-3xl font-bold text-green-400 mb-2">15+</div>
+              <div className="text-3xl font-bold text-green-400 mb-2">{projects.length}+</div>
               <div className="text-gray-300">Projetos Concluídos</div>
             </div>
             <div className="bg-gray-800 p-6 rounded-lg shadow">
@@ -204,7 +245,7 @@ export default function Projetos() {
               <div className="text-gray-300">Tecnologias Dominadas</div>
             </div>
             <div className="bg-gray-800 p-6 rounded-lg shadow">
-              <div className="text-3xl font-bold text-green-400 mb-2">1000+</div>
+              <div className="text-3xl font-bold text-green-400 mb-2">100+</div>
               <div className="text-gray-300">Commits no GitHub</div>
             </div>
             <div className="bg-gray-800 p-6 rounded-lg shadow">
@@ -225,7 +266,7 @@ export default function Projetos() {
             Confira meu GitHub para ver todos os projetos e contribuições open source.
           </p>
           <a
-            href="https://github.com/usuario"
+            href="https://github.com/Ewayrton"
             className="inline-flex items-center bg-gray-900 text-green-400 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors border border-green-500"
             target="_blank"
             rel="noopener noreferrer"
