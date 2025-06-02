@@ -26,7 +26,7 @@ export default function Projetos() {
       github: "https://github.com/Ewayrton/projetoFinal-programacaoWeb-2024.2/tree/main/DASHBOARD",
       demo: "https://projeto-final-programacao-web-2024-2-six.vercel.app/",
       date: "2024",
-      category: "Frontend",
+      category: "Full Stack",
     },
     {
       title: "Jogo de Dados",
@@ -36,7 +36,7 @@ export default function Projetos() {
       github: "https://github.com/Ewayrton/pfe-2025-1/tree/main/atv02-dados",
       demo: "https://dadosss-nine.vercel.app/",
       date: "2024",
-      category: "Full Stack",
+      category: "Frontend",
     },
     {
       title: "Sorteador",
