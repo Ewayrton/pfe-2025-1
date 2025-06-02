@@ -2,8 +2,13 @@
 
 import { Briefcase, Calendar, MapPin } from "lucide-react"
 import { motion } from "framer-motion"
+import Link from "next/link"
+import { useState } from "react" // Import useState
+import Contato from "../components/Contato"
 
 export default function ExperienciaProfissional() {
+  const [showContact, setShowContact] = useState(false) // State for contact modal
+
   const experiences = [
     {
       position: "Residente em Software (Banco de Dados)",
@@ -194,22 +199,33 @@ export default function ExperienciaProfissional() {
           <h2 className="text-2xl font-bold mb-4">Interessado em trabalhar comigo?</h2>
           <p className="mb-6">Estou sempre aberto a novas oportunidades e desafios interessantes.</p>
           <div className="flex justify-center space-x-4">
-            <motion.button
-              className="btn-secondary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Ver Projetos
-            </motion.button>
+            <Link href="/projetos">
+              <motion.button
+                className="btn-secondary"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Ver Projetos
+              </motion.button>
+            </Link>
             <motion.button
               className="btn-primary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => setShowContact(true)}
             >
               Entrar em Contato
             </motion.button>
           </div>
         </motion.div>
+
+        {/* Contact Modal */}
+        {showContact && (
+          <Contato 
+            showContact={showContact} 
+            setShowContact={setShowContact} 
+          />
+        )}
       </div>
     </div>
   )
